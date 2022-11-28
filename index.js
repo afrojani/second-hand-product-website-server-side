@@ -21,6 +21,7 @@ async function run() {
     try {
         const carsCollection = client.db('carData').collection('carsCollections');
         const carsCategory = client.db('carData').collection('category');
+        const bookingsCollection = client.db('carData').collection('bookings');
 
         app.get('/categories', async (req, res) => {
             const query = {}
@@ -37,6 +38,16 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result);
         });
+
+
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            console.log(booking);
+            const result = await bookingsCollection.insertOne(booking);
+            res.send(result);
+        });
+
+
     }
     finally {
 
