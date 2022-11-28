@@ -46,6 +46,13 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/products', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            const result = await carsCollection.find(query).toArray();
+            res.send(result);
+        });
+
 
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
