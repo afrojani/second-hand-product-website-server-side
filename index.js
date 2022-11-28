@@ -40,6 +40,12 @@ async function run() {
             res.send(result);
         });
 
+        app.post('/products', async (req, res) => {
+            const product = req.body;
+            const result = await carsCollection.insertOne(product);
+            res.send(result);
+        });
+
 
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
@@ -64,7 +70,7 @@ async function run() {
         app.get('/user', async (req, res) => {
             const email = req.query.email;
             const query = { email: email };
-            const user = await usersCollection.find(query).toArray();
+            const user = await usersCollection.findOne(query);
             console.log(user);
             res.send(user);
         });
